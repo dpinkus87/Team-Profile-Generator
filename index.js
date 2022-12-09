@@ -6,16 +6,12 @@ const Manager = require("./lib/manager")
 const Engineer = require("./lib/engineer")
 const Intern = require("./lib/intern")
 
-const {
-    internQuestions,
-    managerQuestions,
-    engineerQuestions,
-    menuQuestion
-} = require("./questions")
+const {internQuestions, managerQuestions, engineerQuestions, menuQuestion} = require("./questions")
+
 const team = []
 
 function writeToFile() {
-    console.log(data);
+    // console.log(data);
     fs.writeFile("./dist/index.html", generateHTML(team), err => console.log(err))
 }
 
@@ -36,9 +32,9 @@ function promptEngineer() {
         name,
         employeeID,
         emailAddress,
-        officeNumber
+        gitHub,
     }) => {
-        const engineer = new Engineer(name, employeeID, emailAddress, officeNumber)
+        const engineer = new Engineer(name, employeeID, emailAddress, gitHub)
         team.push(engineer)
     })
 }
@@ -48,9 +44,9 @@ function promptIntern() {
         name,
         employeeID,
         emailAddress,
-        officeNumber
+        school,
     }) => {
-        const manager = new Intern(name, employeeID, emailAddress, officeNumber)
+        const intern = new Intern(name, employeeID, emailAddress, school)
         team.push(intern)
     })
 }
@@ -64,18 +60,20 @@ function addToTeam() {
         promptEngineer()
     } else if(addTeam === "intern"){
         promptIntern()
+    } else if (addTeam === "finished"){
+        generateHTML()
     }
-    }) 
+}) 
 }
 
 function init() {
-    inquirer.prompt(questions).then(answers => {
+    inquirer.prompt(menuQuestion).then(answers => {
         console.log(answers);
         writeToFile("Index.html", answers)
     })
 }
 
-//init();
+init();
 promptManager()
-promptEngineer()
-promptIntern()
+// promptEngineer()
+// promptIntern()
