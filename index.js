@@ -15,43 +15,6 @@ function writeToFile() {
     fs.writeFile("./dist/index.html", generateHTML(team), err => console.log(err))
 }
 
-function promptManager() {
-    inquirer.prompt(managerQuestions).then(({
-        name,
-        employeeID,
-        emailAddress,
-        officeNumber
-    }) => {
-        const manager = new Manager(name, employeeID, emailAddress, officeNumber)
-        team.push(manager)
-    })
-}
-
-function promptEngineer() {
-    inquirer.prompt(engineerQuestions).then(({
-        name,
-        employeeID,
-        emailAddress,
-        gitHub,
-    }) => {
-        const engineer = new Engineer(name, employeeID, emailAddress, gitHub)
-        team.push(engineer)
-    })
-}
-
-function promptIntern() {
-    inquirer.prompt(internQuestions).then(({
-        name,
-        employeeID,
-        emailAddress,
-        school,
-    }) => {
-        const intern = new Intern(name, employeeID, emailAddress, school)
-        team.push(intern)
-    })
-}
-
-
 function addToTeam() {
     inquirer.prompt(menuQuestion).then(({addTeam}) => {
         if(addTeam === "manager"){
@@ -66,14 +29,46 @@ function addToTeam() {
 }) 
 }
 
-function init() {
-    inquirer.prompt(menuQuestion).then(answers => {
-        console.log(answers);
-        writeToFile("Index.html", answers)
+function promptManager() {
+    inquirer.prompt(managerQuestions).then(({
+        name,
+        employeeID,
+        emailAddress,
+        officeNumber
+    }) => {
+        const manager = new Manager(name, employeeID, emailAddress, officeNumber)
+        team.push(manager)
+    addToTeam()}) 
+}
+
+function promptEngineer() {
+    inquirer.prompt(engineerQuestions).then(({
+        name,
+        employeeID,
+        emailAddress,
+        gitHub,
+    }) => {
+        const engineer = new Engineer(name, employeeID, emailAddress, gitHub)
+        team.push(engineer)
+        addToTeam()
     })
 }
 
+function promptIntern() {
+    inquirer.prompt(internQuestions).then(({
+        name,
+        employeeID,
+        emailAddress,
+        school,
+    }) => {
+        const intern = new Intern(name, employeeID, emailAddress, school)
+        team.push(intern)
+        addToTeam()
+    })
+}
+
+function init() {
+    addToTeam()
+}
+
 init();
-promptManager()
-// promptEngineer()
-// promptIntern()
