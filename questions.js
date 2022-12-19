@@ -60,5 +60,6 @@ const menuQuestion = {
 }
 
 module.exports = {
-    managerQuestions, engineerQuestions, internQuestions, menuQuestion
+    managerQuestions, engineerQuestions, internQuestions, 
+    menuQuestion
 }
