@@ -24,7 +24,7 @@ function addToTeam() {
     } else if(addTeam === "intern"){
         promptIntern()
     } else if (addTeam === "finished"){
-        generateHTML()
+        generateHTML(team)
     }
 }) 
 }

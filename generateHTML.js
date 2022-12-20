@@ -1,5 +1,18 @@
 const Employee = require("./lib/employee")
 
+function generateEngineerCard(){
+    return this.Engineer
+}
+
+function generateManagerCard(){
+    return this.Manager
+}
+
+function generateInternCard(){
+    return this.Intern
+}
+
+
 function generateHTML(data) {
     console.log(data);
     return `
